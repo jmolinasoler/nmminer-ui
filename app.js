@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
+const config = require('./config/config');
 const minerRoutes = require('./routes/minerRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = config.server.port;
 
 // Set view engine
 app.set('view engine', 'ejs');
@@ -11,6 +12,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Make config available to all views
+app.locals.config = config;
 
 // Routes
 app.use('/', minerRoutes);
@@ -25,4 +29,6 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
     console.log(`🚀 NM Miner UI running on http://localhost:${PORT}`);
+    console.log(`📡 Monitoring miner at: ${config.miner.url}`);
+    console.log(`🔄 Refresh interval: ${config.ui.refreshInterval}ms`);
 });

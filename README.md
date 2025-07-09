@@ -78,27 +78,50 @@ nmminer-ui/
 
 ## Configuration ⚙️
 
-### Miner URL
-To change the miner device URL, edit the `minerUrl` in `/models/minerModel.js`:
-
-```javascript
-this.minerUrl = 'http://YOUR_MINER_IP/data';
-```
-
-### Refresh Interval
-To change the auto-refresh interval, edit the interval in `/public/js/dashboard.js`:
-
-```javascript
-// Update every 5 seconds (5000ms)
-setInterval(updateData, 5000);
-```
-
-### Port Configuration
-To change the server port, set the `PORT` environment variable or edit `app.js`:
+### Environment Variables
+Create a `.env` file in the root directory to configure the application:
 
 ```bash
-PORT=8080 npm start
+# Copy the example file
+cp .env.example .env
 ```
+
+Edit the `.env` file with your settings:
+
+```env
+# Miner Configuration
+MINER_IP=192.168.0.61
+MINER_PORT=80
+MINER_ENDPOINT=/data
+MINER_TIMEOUT=5000
+
+# Server Configuration
+PORT=3000
+
+# UI Configuration
+REFRESH_INTERVAL=5000
+```
+
+### Configuration Options
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `MINER_IP` | IP address of your NM Miner device | `192.168.0.61` |
+| `MINER_PORT` | Port of the miner web interface | `80` |
+| `MINER_ENDPOINT` | API endpoint for miner data | `/data` |
+| `MINER_TIMEOUT` | Request timeout in milliseconds | `5000` |
+| `PORT` | Server port for the dashboard | `3000` |
+| `REFRESH_INTERVAL` | Auto-refresh interval in milliseconds | `5000` |
+
+### Alternative Configuration Methods
+
+**Via command line:**
+```bash
+MINER_IP=192.168.1.100 PORT=8080 npm start
+```
+
+**Via code (config/config.js):**
+Edit the default values in `/config/config.js` if you prefer not to use environment variables.
 
 ## Data Format 📋
 

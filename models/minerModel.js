@@ -1,13 +1,17 @@
 const axios = require('axios');
+const config = require('../config/config');
 
 class MinerModel {
   constructor() {
-    this.minerUrl = 'http://192.168.42.61/data';
+    this.minerUrl = config.miner.url;
+    this.timeout = config.miner.timeout;
   }
 
   async getMinerData() {
     try {
-      const response = await axios.get(this.minerUrl, { timeout: 5000 });
+      const response = await axios.get(this.minerUrl, { 
+        timeout: this.timeout 
+      });
       return {
         success: true,
         data: response.data
@@ -41,6 +45,14 @@ class MinerModel {
       };
     }
     return { raw: shares };
+  }
+
+  // Get current configuration
+  getConfig() {
+    return {
+      url: this.minerUrl,
+      timeout: this.timeout
+    };
   }
 }
 

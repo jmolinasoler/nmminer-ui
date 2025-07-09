@@ -14,13 +14,16 @@
                 <span class="status-indicator" id="status-dot"></span>
                 <span id="status-text">Checking connection...</span>
             </div>
+            <div class="config-info">
+                <small>Monitoring: <%= config.miner.url %> | <span id="config-info"></span></small>
+            </div>
         </div>
 
         <div id="dashboard-content">
             <% if (error) { %>
                 <div class="card error">
                     <div class="card-title">⚠️ Connection Error</div>
-                    <p>Unable to connect to miner: <%= error %></p>
+                    <p>Unable to connect to miner at <%= config.miner.url %>: <%= error %></p>
                 </div>
             <% } else if (minerData) { %>
                 <div class="status-grid">

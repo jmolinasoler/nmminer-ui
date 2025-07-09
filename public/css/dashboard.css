@@ -16,6 +16,12 @@ body {
     margin-bottom: 30px;
 }
 
+.config-info {
+    margin-top: 10px;
+    color: #888888;
+    font-size: 12px;
+}
+
 .status-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

@@ -1,4 +1,5 @@
 let isOnline = false;
+let refreshInterval = 5000; // Default value, will be updated from server
 
 async function updateData() {
     const dashboardContent = document.getElementById('dashboard-content');
@@ -56,11 +57,31 @@ function updateDashboardData(data) {
     }
 }
 
+// Get refresh interval from server config
+async function getConfig() {
+    try {
+        const response = await fetch('/api/config');
+        const config = await response.json();
+        refreshInterval = config.refreshInterval || 5000;
+    } catch (error) {
+        console.error('Failed to get config, using default refresh interval');
+    }
+}
+
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Update data every 5 seconds
-    setInterval(updateData, 5000);
+document.addEventListener('DOMContentLoaded', async function() {
+    // Get configuration first
+    await getConfig();
+    
+    // Update data every configured interval
+    setInterval(updateData, refreshInterval);
 
     // Initial status check
     updateData();
+    
+    // Display current configuration
+    const configInfo = document.getElementById('config-info');
+    if (configInfo) {
+        configInfo.textContent = `Refresh: ${refreshInterval/1000}s`;
+    }
 });
