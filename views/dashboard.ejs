@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NM Miner Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 NM Miner Dashboard</h1>
+            <div id="connection-status">
+                <span class="status-indicator" id="status-dot"></span>
+                <span id="status-text">Checking connection...</span>
+            </div>
+        </div>
+
+        <div id="dashboard-content">
+            <% if (error) { %>
+                <div class="card error">
+                    <div class="card-title">⚠️ Connection Error</div>
+                    <p>Unable to connect to miner: <%= error %></p>
+                </div>
+            <% } else if (minerData) { %>
+                <div class="status-grid">
+                    <div class="card">
+                        <div class="card-title">⚡ Mining Status</div>
+                        <div class="data-row">
+                            <span class="data-label">Uptime:</span>
+                            <span class="data-value" id="timeMining"><%= minerData.timeMining %></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Hash Rate:</span>
+                            <span class="data-value" id="hashRate"><%= minerData.hashRate %></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Board Type:</span>
+                            <span class="data-value" id="boardtype"><%= minerData.boardtype %></span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">🏊 Pool Information</div>
+                        <div class="data-row">
+                            <span class="data-label">Pool:</span>
+                            <span class="data-value" id="pool"><%= minerData.pool %></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Shares:</span>
+                            <span class="data-value" id="shares"><%= minerData.shares %></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Valid:</span>
+                            <span class="data-value" id="valid"><%= minerData.valid %></span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">📊 Difficulty Stats</div>
+                        <div class="data-row">
+                            <span class="data-label">Network Diff:</span>
+                            <span class="data-value" id="netDiff"><%= minerData.netDiff %></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Pool Diff:</span>
+                            <span class="data-value" id="poolDiff"><%= minerData.poolDiff %></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Last Diff:</span>
+                            <span class="data-value" id="lastDiff"><%= minerData.lastDiff %></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Best Diff:</span>
+                            <span class="data-value" id="bestDiff"><%= minerData.bestDiff %></span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">📡 System Info</div>
+                        <div class="data-row">
+                            <span class="data-label">RSSI:</span>
+                            <span class="data-value" id="rssi"><%= minerData.rssi %></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Free Heap:</span>
+                            <span class="data-value" id="freeHeap"><%= minerData.freeHeap %></span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="last-update" id="lastUpdate">
+            <% if (minerData && minerData.lastUpdate) { %>
+                Last updated: <%= minerData.lastUpdate %>
+            <% } %>
+        </div>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
