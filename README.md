@@ -181,5 +181,3 @@ If you encounter any issues or have questions:
 4. Open an issue in the repository
 
 ---
-
-**Made with ❤️ for the NM Miner community**
