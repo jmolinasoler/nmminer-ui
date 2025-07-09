@@ -37,7 +37,16 @@ A modern, real-time web dashboard for monitoring NM Miner devices. Built with No
    npm install
    ```
 
-3. **Start the application**
+3. **Configure the application**
+   ```bash
+   # Copy the example environment file
+   cp .env.example .env
+   
+   # Edit the .env file with your miner's IP address
+   nano .env
+   ```
+
+4. **Start the application**
    ```bash
    # Development mode (with auto-reload)
    npm run dev
@@ -46,7 +55,7 @@ A modern, real-time web dashboard for monitoring NM Miner devices. Built with No
    npm start
    ```
 
-4. **Open your browser**
+5. **Open your browser**
    Navigate to `http://localhost:3000`
 
 ## Project Structure 📁
